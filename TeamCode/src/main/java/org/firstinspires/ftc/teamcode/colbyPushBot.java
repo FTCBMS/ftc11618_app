@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.robotcore.hardware.Servo;
 /**
  * This is NOT an opmode.
  *
@@ -27,9 +27,10 @@ public class colbyPushBot
     public DcMotor leftMotor   = null;
     public DcMotor rightMotor  = null;
     public DcMotor sweeperMoter = null;
-    public DcMotor shooterMotor = null;
-
-    //public Servo    rightClaw   = null;
+    public DcMotor shooterMotor1 = null;
+    public DcMotor shooterMotor2 = null;
+    public Servo    servo   = null;
+    public Servo    servo2   = null;
     public static final double MID_SERVO       =  0.5 ;
     //public static final double ARM_DOWN_POWER  = -0.45 ;
     /* local OpMode members. */
@@ -50,7 +51,11 @@ public class colbyPushBot
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
-        //sweeperMoter = hwMap.dcMotor.get("sweeper_drive");
+        shooterMotor1   = hwMap.dcMotor.get("shoot_1");
+        shooterMotor2  = hwMap.dcMotor.get("shoot_2");
+        servo   = hwMap.servo.get("servo_1");
+        servo2  = hwMap.servo.get("servo_2");
+        sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
@@ -62,7 +67,9 @@ public class colbyPushBot
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //sweeperMoter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        sweeperMoter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.

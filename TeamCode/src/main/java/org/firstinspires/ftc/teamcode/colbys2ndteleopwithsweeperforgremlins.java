@@ -35,24 +35,22 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="colbys2nd teleop sweeper", group="Pushbot")
-public class colbys2ndteleopwithsweeper extends OpMode {
+@TeleOp(name="colbys2nd teleop sweeper for gremlins", group="Pushbot")
+public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
     /* Declare OpMode members. */
-    colbyPushBot robot       = new colbyPushBot(); // use the class created to define a Pushbot's hardware
-    static final double INCREMENT   = 0.1;     // amount to slew servo each CYCLE_MS cycle
-    static final int    CYCLE_MS    =   50;     // period of each cycle
-    static final double MAX_POS     =  1.0;     // Maximum rotational position
-    static final double MIN_POS     =  0.0;     // Minimum rotational position
+    colbyPushBot robot = new colbyPushBot(); // use the class created to define a Pushbot's hardware
+    static final double INCREMENT = 0.1;     // amount to slew servo each CYCLE_MS cycle
+    static final int CYCLE_MS = 50;     // period of each cycle
+    static final double MAX_POS = 1.0;     // Maximum rotational position
+    static final double MIN_POS = 0.0;     // Minimum rotational position
 
-    static final double FOUR_FIVE     = -0.125;
-    static final double START     =  -0.25;
-    static final double ARM_UP     =  0.0;
+    static final double max = -0.125;
+    static final double START = 0;
+    static final double ARM_UP = 0.0;
     // Define class members
     com.qualcomm.robotcore.hardware.Servo servo;
-
-
-
+    com.qualcomm.robotcore.hardware.Servo servo2;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -83,9 +81,9 @@ public class colbys2ndteleopwithsweeper extends OpMode {
     }
 
     /*
-     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
+     * Code to run REPEATEDLY after
+    @Overridethe driver hits PLAY but before they hit STOP
      */
-    @Override
     public void loop() {
 
         double left = -gamepad1.left_stick_y;
@@ -93,40 +91,33 @@ public class colbys2ndteleopwithsweeper extends OpMode {
         robot.leftMotor.setPower(left);
         robot.rightMotor.setPower(right);
         servo.setPosition(START);
+        servo2.setPosition(START);
 
-        //ignore unless...
-        //if (gamepad2.right_stick_y == 1) {//pressed all the way forward
-          //  robot.sweeperMoter.setPower(0.8);
-        //}
-        //if (gamepad2.right_stick_y == 0) {//nothing pressed
-          // robot.sweeperMoter.setPower(0);
 
-        //}
-        //if (gamepad2.right_stick_y == -1) {
-          //  robot.sweeperMoter.setPower(-0.8);
-        //}
-
-        //speed of sweeper set by the right stick y
-        robot.sweeperMoter.setPower(gamepad2.right_stick_y);
-
-        //ignore whats below unless line ubove doesnt work or...
-          //  if (gamepad2.left_stick_x < 0) { // pressed forward
-        //    robot.sweeperMoter.setPower(0.8);
-        //}
-        //if (gamepad2.left_stick_x > 0) { // pressed backward
-           // robot.sweeperMoter.setPower(0);
+        //sweepermoter powed by left_trigger
+        robot.sweeperMoter.setPower(gamepad1.left_trigger);
 
 
         //lifter
-            if (gamepad2.a) {
-                servo.setPosition(FOUR_FIVE);
-            }
-
-                if (gamepad2.y)
-                    servo.setPosition(FOUR_FIVE);
-                //shooter
-                double shoot = -gamepad2.right_trigger;
-                robot.shooterMotor.setPower(shoot);
-
+        if (gamepad1.a) {
+            servo.setPosition(max);
+            servo2.setPosition(max);
         }
+
+
+        if (gamepad1.y) {
+            servo.setPosition(START);
+            servo2.setPosition(START);
+        }
+
+        //shooter
+        double shoot1 = -gamepad1.right_trigger;
+        robot.shooterMotor1.setPower(shoot1);
+
+
+        //shooter
+        double shoot2 = -gamepad1.right_trigger;
+        robot.shooterMotor2.setPower(shoot2);
+
     }
+}
