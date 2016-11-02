@@ -49,8 +49,6 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
     static final double START = 0;
     static final double ARM_UP = 0.0;
     // Define class members
-    com.qualcomm.robotcore.hardware.Servo servo;
-    com.qualcomm.robotcore.hardware.Servo servo2;
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -90,34 +88,46 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         double right = -gamepad1.right_stick_y;
         robot.leftMotor.setPower(left);
         robot.rightMotor.setPower(right);
-        servo.setPosition(START);
-        servo2.setPosition(START);
+        robot.servo.setPosition(START);
+        robot.servo2.setPosition(START);
 
 
         //sweepermoter powed by left_trigger
-        robot.sweeperMoter.setPower(gamepad1.left_trigger);
+        //double sweeper = gamepad1.left_trigger;
+        robot.sweeperMoter.setPower(1);
 
 
         //lifter
         if (gamepad1.a) {
-            servo.setPosition(max);
-            servo2.setPosition(max);
+            robot.servo.setPosition(max);
+            robot.servo2.setPosition(-max);
         }
 
 
         if (gamepad1.y) {
-            servo.setPosition(START);
-            servo2.setPosition(START);
+            robot.servo.setPosition(START);
+            robot.servo2.setPosition(-START);
+        }
+
+        if (gamepad1.b) {
+            robot.servo.setPosition(-max);
+            robot.servo2.setPosition(max);
+        }
+
+
+        if (gamepad1.x) {
+            robot.servo.setPosition(-START);
+            robot.servo2.setPosition(START);
         }
 
         //shooter
-        double shoot1 = -gamepad1.right_trigger;
-        robot.shooterMotor1.setPower(shoot1);
-
+        double shoot1 = gamepad1.right_trigger;
+        robot.shooterMotor1.setPower(-shoot1);
+        robot.shooterMotor2.setPower(shoot1);
 
         //shooter
-        double shoot2 = -gamepad1.right_trigger;
-        robot.shooterMotor2.setPower(shoot2);
-
+        double shoot2 = (gamepad1.right_bumper ? 1 : 0);
+        robot.shooterMotor1.setPower(shoot1);
+        robot.shooterMotor2.setPower(-shoot1);
     }
 }
