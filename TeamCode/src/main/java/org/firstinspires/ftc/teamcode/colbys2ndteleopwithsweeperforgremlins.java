@@ -34,6 +34,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="colbys2nd teleop sweeper for gremlins", group="Pushbot")
 public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
@@ -45,9 +46,9 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
     static final double MAX_POS = 1.0;     // Maximum rotational position
     static final double MIN_POS = 0.0;     // Minimum rotational position
 
-    static final double max = -0.125;
-    static final double START = 0;
-    static final double ARM_UP = 0.0;
+    static final double max = 0.5;
+    static final double START = 0.25;
+
     // Define class members
 
     /*
@@ -61,8 +62,15 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");    //
+        telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
+
+        robot.servo2.setDirection(Servo.Direction.REVERSE);
+        robot.servo.scaleRange(START, max);
+        robot.servo2.scaleRange(START, max);
+        robot.servo.setPosition(0);
+        robot.servo2.setPosition(0);
     }
+
 
     /*
      * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
@@ -82,45 +90,58 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
      * Code to run REPEATEDLY after
     @Overridethe driver hits PLAY but before they hit STOP
      */
+
+
     public void loop() {
+
 
         double left = -gamepad1.left_stick_y;
         double right = -gamepad1.right_stick_y;
         robot.leftMotor.setPower(left);
         robot.rightMotor.setPower(right);
-        robot.servo.setPosition(START);
-        robot.servo2.setPosition(START);
 
 
         //sweepermoter powed by left_trigger
         //double sweeper = gamepad1.left_trigger;
-        robot.sweeperMoter.setPower(1);
 
+        if (gamepad1.left_bumper) {
+            robot.sweeperMoter.setPower(-1);
+        } else {
+            robot.sweeperMoter.setPower(0);
+        }
 
-        //lifter
+        if (gamepad1.right_bumper) {
+            robot.sweeperMoter.setPower(1);
+        } else {
+            robot.sweeperMoter.setPower(0);
+        }
+
+        /*
+        position += .001;
+        position %= 1;
+        robot.servo.setPosition(position);
+        */
+
         if (gamepad1.a) {
-            robot.servo.setPosition(max);
-            robot.servo2.setPosition(-max);
-        }
+            robot.servo.setPosition(0);
+            robot.servo2.setPosition(0);
 
+            /*
+            double current = robot.servo.getPosition();
 
-        if (gamepad1.y) {
-            robot.servo.setPosition(START);
-            robot.servo2.setPosition(-START);
-        }
-
-        if (gamepad1.b) {
-            robot.servo.setPosition(-max);
-            robot.servo2.setPosition(max);
-        }
-
-
-        if (gamepad1.x) {
-            robot.servo.setPosition(-START);
-            robot.servo2.setPosition(START);
+            if (current < max) {
+                current -= 0.05;
+                robot.servo.setPosition(current);
+                robot.servo2.setPosition(current);
+            }
+            */
+        } else if (gamepad1.y) {
+            robot.servo.setPosition(1);
+            robot.servo2.setPosition(1);
         }
 
         //shooter
+        /*
         double shoot1 = gamepad1.right_trigger;
         robot.shooterMotor1.setPower(-shoot1);
         robot.shooterMotor2.setPower(shoot1);
@@ -129,5 +150,7 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         double shoot2 = (gamepad1.right_bumper ? 1 : 0);
         robot.shooterMotor1.setPower(shoot1);
         robot.shooterMotor2.setPower(-shoot1);
+
+        */
     }
 }
