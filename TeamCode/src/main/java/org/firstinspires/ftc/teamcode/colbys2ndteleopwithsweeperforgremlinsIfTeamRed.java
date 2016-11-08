@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="colbys2nd teleop sweeper for gremlins", group="Pushbot")
-public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
+public class colbys2ndteleopwithsweeperforgremlinsIfTeamRed extends OpMode {
 
     /* Declare OpMode members. */
     colbyPushBot robot = new colbyPushBot(); // use the class created to define a Pushbot's hardware
@@ -94,14 +94,14 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
     public void loop() {
 
-
+        //tank mode drive
         double left = -gamepad1.left_stick_y;
         double right = -gamepad1.right_stick_y;
-        robot.leftMotor.setPower(left);
-        robot.rightMotor.setPower(right);
+        robot.leftMotor.setPower(left+right);
+        robot.rightMotor.setPower(right+left);
 
 
-        //sweepermoter powed by left_trigger
+        //sweepermoter powed by left_bumper
         //double sweeper = gamepad1.left_trigger;
 
         if (gamepad1.left_bumper) {
@@ -121,36 +121,29 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         position %= 1;
         robot.servo.setPosition(position);
         */
-
+        //lifter going on one servo
         if (gamepad1.a) {
             robot.servo.setPosition(0);
-            robot.servo2.setPosition(0);
 
-            /*
-            double current = robot.servo.getPosition();
-
-            if (current < max) {
-                current -= 0.05;
-                robot.servo.setPosition(current);
-                robot.servo2.setPosition(current);
-            }
-            */
         } else if (gamepad1.y) {
             robot.servo.setPosition(1);
-            robot.servo2.setPosition(1);
+            //robot.servo2.setPosition(1);
         }
 
         //shooter
-        /*
+
         double shoot1 = gamepad1.right_trigger;
         robot.shooterMotor1.setPower(-shoot1);
         robot.shooterMotor2.setPower(shoot1);
 
-        //shooter
+        /*
+        shooter
         double shoot2 = (gamepad1.right_bumper ? 1 : 0);
         robot.shooterMotor1.setPower(shoot1);
         robot.shooterMotor2.setPower(-shoot1);
 
         */
+
     }
+
 }
