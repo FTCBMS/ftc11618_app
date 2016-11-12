@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="colbys2nd teleop sweeper for gremlins", group="Pushbot")
-public class colbys2ndteleopwithsweeperforgremlinsIfTeamBlue extends OpMode {
+public class sad_bot extends OpMode {
 
     /* Declare OpMode members. */
     colbyPushBot robot = new colbyPushBot(); // use the class created to define a Pushbot's hardware
@@ -62,87 +62,13 @@ public class colbys2ndteleopwithsweeperforgremlinsIfTeamBlue extends OpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
+        telemetry.addData("Say", "im sad are. are you sad? i hope you are also sad because that would make me happy are you sad... oh your not im sorry for myself how can i make you sad? if i make a snowman with you then destroy it while your sleeping will that make you sad? please tell me what will make you sad im sad and i need to be happy otherwise im not happy if im still sad if you are happy then i will be sad pleas be sad. p.s the sadder the better happy birth day xdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
 
-        robot.servo2.setDirection(Servo.Direction.REVERSE);
-        robot.servo.scaleRange(START, max);
-        robot.servo2.scaleRange(START, max);
-        robot.servo.setPosition(0);
-        robot.servo2.setPosition(0);
+
     }
 
-
-    /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-     */
     @Override
-    public void init_loop() {
-    }
-
-    /*
-     * Code to run ONCE when the driver hits PLAY
-     */
-    @Override
-    public void start() {
-    }
-
-    /*
-     * Code to run REPEATEDLY after
-    @Overridethe driver hits PLAY but before they hit STOP
-     */
-
-
     public void loop() {
-
-        //tank mode drive
-        double left = -gamepad1.left_stick_y;
-        double right = -gamepad1.right_stick_y;
-        robot.leftMotor.setPower(left+right);
-        robot.rightMotor.setPower(right+left);
-
-
-        //sweepermoter powed by left_bumper
-        //double sweeper = gamepad1.left_trigger;
-
-        if (gamepad1.left_bumper) {
-            robot.sweeperMoter.setPower(-1);
-        } else {
-            robot.sweeperMoter.setPower(0);
-        }
-
-        if (gamepad1.right_bumper) {
-            robot.sweeperMoter.setPower(1);
-        } else {
-            robot.sweeperMoter.setPower(0);
-        }
-
-        /*
-        position += .001;
-        position %= 1;
-        robot.servo.setPosition(position);
-        */
-        //lifter going on one servo
-        if (gamepad1.a) {
-            robot.servo.setPosition(0);
-
-        } else if (gamepad1.y) {
-            robot.servo.setPosition(1);
-            //robot.servo2.setPosition(1);
-        }
-
-        //shooter
-
-        double shoot1 = gamepad1.right_trigger;
-        robot.shooterMotor1.setPower(-shoot1);
-        robot.shooterMotor2.setPower(shoot1);
-
-        /*
-        shooter
-        double shoot2 = (gamepad1.right_bumper ? 1 : 0);
-        robot.shooterMotor1.setPower(shoot1);
-        robot.shooterMotor2.setPower(-shoot1);
-
-        */
 
     }
 
