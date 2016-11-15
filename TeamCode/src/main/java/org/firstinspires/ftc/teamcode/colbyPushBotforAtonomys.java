@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 //import com.google.blocks.ftcrobotcontroller.runtime.DcMotorAccess;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 /**
  * This is NOT an opmode.
  *
@@ -21,27 +23,26 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Servo channel:  Servo to open left claw:  "left_hand"
  * Servo channel:  Servo to open right claw: "right_hand"
  */
-public class colbyPushBot
+public class colbyPushBotforAtonomys
 {
     /* Public OpMode members. */
     public DcMotor leftMotor   = null;
     public DcMotor rightMotor  = null;
     public DcMotor sweeperMoter = null;
     public DcMotor shooterMotor1 = null;
-    public Servo    pan   = null;
-    public Servo buttonPusher;
-
-
+    //public DcMotor shooterMotor2 = null;
+    public Servo    servo   = null;
+    //public Servo    servo2   = null;
     public static final double MID_SERVO       =  0.5 ;
     //public static final double ARM_DOWN_POWER  = -0.45 ;
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
-
+    public DcMotor shooterMotor;
 
 
     /* Constructor */
-    public colbyPushBot(){
+    public colbyPushBotforAtonomys(){
 
     }
 
@@ -55,7 +56,7 @@ public class colbyPushBot
         rightMotor  = hwMap.dcMotor.get("right_drive");
         //shooterMotor1   = hwMap.dcMotor.get("shoot_1");
         //shooterMotor2  = hwMap.dcMotor.get("shoot_2");
-        pan   = hwMap.servo.get("servo_1");
+        servo   = hwMap.servo.get("servo_1");
        // servo2  = hwMap.servo.get("servo_2");
         sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
 

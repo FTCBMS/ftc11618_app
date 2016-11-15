@@ -61,16 +61,16 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @Autonomous(name="Pushbot: Auto Drive By Time", group="Pushbot")
-@Disabled
+//@Disabled
 public class ATONOMYSFORGREMLINS extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwarePushbot         robot   = new HardwarePushbot();   // Use a Pushbot's hardware
-    private ElapsedTime     runtime = new ElapsedTime();
+    colbyPushBotforAtonomys robot = new colbyPushBotforAtonomys();   // Use a Pushbot's hardware
+    private ElapsedTime runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 0.6;
-    static final double     TURN_SPEED    = 0.5;
+    static final double FORWARD_SPEED = 0.6;
+    static final double TURN_SPEED = 0.5;
 
     @Override
     public void runOpMode() {
@@ -90,16 +90,7 @@ public class ATONOMYSFORGREMLINS extends LinearOpMode {
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
-        // Step 1:  Drive forward for 1 seconds
-        robot.leftMotor.setPower(FORWARD_SPEED);
-        robot.rightMotor.setPower(FORWARD_SPEED);
-        runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 2.0)) {
-            telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
-            telemetry.update();
-        }
-
-        // Step 2:  Spin right for 0.125 seconds
+        // Step 1:  pivot 45 degrees
         robot.leftMotor.setPower(TURN_SPEED);
         robot.rightMotor.setPower(-TURN_SPEED);
         runtime.reset();
@@ -108,36 +99,47 @@ public class ATONOMYSFORGREMLINS extends LinearOpMode {
             telemetry.update();
         }
 
-        {
-        // Step 3:   Spin right for 0.6 seconds
-            robot.leftMotor.setPower(TURN_SPEED);
-            robot.rightMotor.setPower(-TURN_SPEED);
-            runtime.reset();
-            while (opModeIsActive() && (runtime.seconds() < 0.6)) {
-                telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
-                telemetry.update();
-            }
-        }
-        // Step 4:  Drive FORWARD for 1 Second
-        robot.leftMotor.setPower(-FORWARD_SPEED);
-        robot.rightMotor.setPower(-FORWARD_SPEED);
+        // Step 2:  shoot
+        robot.shooterMotor1.setPower(-FORWARD_SPEED);
+        robot.shooterMotor1.setPower(-FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+        while (opModeIsActive() && (runtime.seconds() < 2.0)) {
             telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
+// Step 3:  Drive FORWARD for 2 Second
+        robot.leftMotor.setPower(-FORWARD_SPEED);
+        robot.rightMotor.setPower(-FORWARD_SPEED);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 2.0)) {
+            telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+            {
+                // Step 4:   Spin right 45 degrees
+                robot.leftMotor.setPower(TURN_SPEED);
+                robot.rightMotor.setPower(-TURN_SPEED);
+                runtime.reset();
+                while (opModeIsActive() && (runtime.seconds() < 0.25)) {
+                    telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
+                    telemetry.update();
+                }
+            }
+            // Step 5:  Drive FORWARD for 3 Second
+            robot.leftMotor.setPower(-FORWARD_SPEED);
+            robot.rightMotor.setPower(-FORWARD_SPEED);
+            runtime.reset();
+            while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+                telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
+                telemetry.update();
+            }
 /*
-        // Step 4:  Stop AND SAY LOL IM LOST.
-        robot.leftMotor.setPower(0);
-        robot.rightMotor.setPower(0);
-        robot.leftClaw.setPosition(1.0);
-        robot.rightClaw.setPosition(0.0);
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
         sleep(1000);
     */
-        telemetry.addData("say", "lol what next");
-    }
+            telemetry.addData("say", "lol what next");
+        }
 
+    }
 }
