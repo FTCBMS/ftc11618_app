@@ -42,7 +42,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="colby's Gremlins Teleop", group="Pushbot")
-public class colbys2ndteleopwithsweeperforgremlinsIfTeamRed extends OpMode {
+public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
     /* Declare OpMode members. */
     colbyPushBot robot = new colbyPushBot(); // use the class created to define a Pushbot's hardware
@@ -114,19 +114,14 @@ public class colbys2ndteleopwithsweeperforgremlinsIfTeamRed extends OpMode {
         if (gamepad2.left_bumper) {
             robot.sweeperMoter.setPower(-1);
             telemetry.addData("Say", "sweeper on");
-        } else {
-            robot.sweeperMoter.setPower(0);
-            telemetry.addData("Say", "sweeper off");
-        }
 
-        if (gamepad2.right_bumper) {
+        } else if (gamepad2.right_bumper) {
             robot.sweeperMoter.setPower(1);
             telemetry.addData("Say", "sweeper on backward");
         } else {
             robot.sweeperMoter.setPower(0);
             telemetry.addData("Say", "sweeper sweeper off");
         }
-
         /*
         position += .001;
         position %= 1;
