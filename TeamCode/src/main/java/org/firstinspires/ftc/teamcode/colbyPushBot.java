@@ -53,11 +53,12 @@ public class colbyPushBot
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
-        //shooterMotor1   = hwMap.dcMotor.get("shoot_1");
-        //shooterMotor2  = hwMap.dcMotor.get("shoot_2");
+        shooterMotor1   = hwMap.dcMotor.get("shoot_1");
         pan   = hwMap.servo.get("servo_1");
-       // servo2  = hwMap.servo.get("servo_2");
+        buttonPusher = hwMap.servo.get("servo_2");
         sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
+
+
 
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
@@ -71,7 +72,7 @@ public class colbyPushBot
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         sweeperMoter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //shooterMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 

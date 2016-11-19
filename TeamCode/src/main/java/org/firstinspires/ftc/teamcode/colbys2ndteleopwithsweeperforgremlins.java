@@ -53,7 +53,8 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
     static final double max = 0.5;
     static final double START = 0.25;
-
+    static final double buttonPushUp = 0.4;
+    static final double buttonPushOffset = 0.098;
     // Define class members
 
     /*
@@ -73,7 +74,7 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         robot.pan.scaleRange(START, max);
         //robot.servo2.scaleRange(START, max);
         robot.pan.setPosition(0);
-        //robot.servo2.setPosition(0);
+        robot.buttonPusher.setPosition(buttonPushUp);
     }
 
 
@@ -100,22 +101,22 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
     public void loop() {
 
         //tank mode drive
-        double left = -gamepad1.left_stick_y;
-        double right = -gamepad1.right_stick_y;
+        double left = gamepad1.left_stick_y;
+        double right = gamepad1.right_stick_y;
         //robot.leftMotor.setPower(left+right);
         //robot.rightMotor.setPower(right+left);
-        robot.leftMotor.setPower(left);
-        robot.rightMotor.setPower(right);
+        robot.leftMotor.setPower(right);
+        robot.rightMotor.setPower(left);
 
 
         //sweepermoter powed by left_bumper
         //double sweeper = gamepad1.left_trigger;
 
-        if (gamepad2.left_bumper) {
+        if (gamepad1.left_bumper) {
             robot.sweeperMoter.setPower(-1);
             telemetry.addData("Say", "sweeper on");
 
-        } else if (gamepad2.right_bumper) {
+        } else if (gamepad1.right_bumper) {
             robot.sweeperMoter.setPower(1);
             telemetry.addData("Say", "sweeper on backward");
         } else {
@@ -128,40 +129,39 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         robot.servo.setPosition(position);
         */
         //lifter going on one servo
-        if (gamepad1.b) {
+        if (gamepad2.a) {
             robot.pan.setPosition(0);
             telemetry.addData("Say", "pan thing down");
 
-        } else if (gamepad1.a) {
-            robot.pan.setPosition(1);
+        } else if (gamepad2.y) {
+            robot.pan.setPosition(1.2);
             telemetry.addData("Say", "pan thing up");
             //robot.servo2.setPosition(1);
         }
 
         //shooter
-        double shoot1 = gamepad2.right_trigger;
-        robot.shooterMotor1.setPower(shoot1);        //robot.shooterMotor2.setPower(shoot1);
-        telemetry.addData("Say", "shooting");
+        //double shoot1 = gamepad2.right_trigger;
+        if(gamepad2.right_trigger > 0) {
+            robot.shooterMotor1.setPower(1);        //robot.shooterMotor2.setPower(shoot1);
+            telemetry.addData("Say", "shooting");
+        }
+        else {
+            robot.shooterMotor1.setPower(0);
+    }
+
 
 
         // button pusher
-        if (gamepad1.dpad_left) {
-            robot.buttonPusher.setPosition(0);
-            telemetry.addData("Say", "button thing down");
+        if (gamepad2.dpad_right) {
+            robot.buttonPusher.setPosition(buttonPushUp - buttonPushOffset);
+            telemetry.addData("Say", "button thing left ");
 
-        } else if (gamepad1.dpad_right) {
-            robot.buttonPusher.setPosition(1);
-            telemetry.addData("Say", "button thing up");
-            //robot.servo2.setPosition(1);
+        } else if (gamepad2.dpad_left) {
+            robot.buttonPusher.setPosition(buttonPushUp + buttonPushOffset);
+            telemetry.addData("Say", "button thing right");
 
-        /*
-        shooter
-        double shoot2 = (gamepad1.right_bumper ? 1 : 0);
-        robot.shooterMotor1.setPower(shoot1);
-        robot.shooterMotor2.setPower(-shoot1);
-*/
-
-
+        } else if (gamepad2.dpad_up){
+            robot.buttonPusher.setPosition(buttonPushUp);
         }
 
     }

@@ -67,12 +67,12 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Auto Drive By Encoder", group="Pushbot")
-@Disabled
+@Autonomous(name="gremlins: Auto Drive By Encoder", group="Pushbot")
+
 public class gremlinsAto extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwarePushbot         robot   = new HardwarePushbot();   // Use a Pushbot's hardware
+    RMHardwarePushbot         robot   = new RMHardwarePushbot();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
@@ -93,6 +93,9 @@ public class gremlinsAto extends LinearOpMode {
          */
         robot.init(hardwareMap);
 
+        waitForStart();
+        telemetry.addData("say","autonomous start now");
+
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
@@ -111,15 +114,17 @@ public class gremlinsAto extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
-        waitForStart();
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(TURN_SPEED,   6, 0, 0.25);  
-        // shoot
-        encoderDrive(DRIVE_SPEED,  73,  73, 0.25);
-        encoderDrive(TURN_SPEED,   3, -3, 0.25);
-        encoderDrive(DRIVE_SPEED, 75, 75, 0.25);
+        encoderDrive(TURN_SPEED,   6, 0, 0.25); // turn 45 degrees
+        robot.shooter.setPower(1);// shoot for 1 seconds
+        
+        sleep(2000); //wait for 1
+        robot.shooter.setPower(0);// wait for 1 second
+        encoderDrive(DRIVE_SPEED, 73,  73, 0.25); //drive forword 73inches
+        encoderDrive(TURN_SPEED,   3, -3, 0.25); //turn 45 degrees
+        encoderDrive(DRIVE_SPEED, 75, 75, 0.25); //drive forword 75inches
 
 
 

@@ -24,8 +24,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class RMHardwarePushbot
 {
     /* Public OpMode members. */
-    public DcMotor  leftMotor   = null;
-    public DcMotor  rightMotor  = null;
+    public DcMotor leftMotor   = null;
+    public DcMotor rightMotor  = null;
+    public DcMotor shooter = null;
     //public DcMotor  armMotor    = null;
     //public Servo    leftClaw    = null;
     //public Servo    rightClaw   = null; */
@@ -51,6 +52,7 @@ public class RMHardwarePushbot
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
+        shooter = hwMap.dcMotor.get("shoot_1");
         //armMotor    = hwMap.dcMotor.get("left_arm");
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
