@@ -94,10 +94,10 @@ public class gremlinsAto extends LinearOpMode {
         robot.init(hardwareMap);
 
         waitForStart();
-        telemetry.addData("say","autonomous start now");
+        telemetry.addData("say","dank memes");
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Resetting Encoders");    //
+        telemetry.addData("Status", "Resetting Encoders");
         telemetry.update();
 
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -108,24 +108,40 @@ public class gremlinsAto extends LinearOpMode {
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
-                          robot.leftMotor.getCurrentPosition(),
-                          robot.rightMotor.getCurrentPosition());
+        telemetry.addData("Path0",  "Starting at %7d :%7d", robot.leftMotor.getCurrentPosition(), robot.rightMotor.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(TURN_SPEED,   6, 0, 0.25); // turn 45 degrees
+        encoderDrive(TURN_SPEED, 144, 0, 100); // turn 45 degrees
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+        telemetry.addData("say","dank memes");
+
+        /*
+        lol
         robot.shooter.setPower(1);// shoot for 1 seconds
-        
         sleep(2000); //wait for 1
         robot.shooter.setPower(0);// wait for 1 second
         encoderDrive(DRIVE_SPEED, 73,  73, 0.25); //drive forword 73inches
         encoderDrive(TURN_SPEED,   3, -3, 0.25); //turn 45 degrees
         encoderDrive(DRIVE_SPEED, 75, 75, 0.25); //drive forword 75inches
-
+*/
 
 
         telemetry.addData("Path", "Complete");
