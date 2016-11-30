@@ -68,7 +68,6 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @Autonomous(name="gremlins: Auto Drive By Encoder", group="Pushbot")
-
 public class gremlinsAto extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -76,7 +75,7 @@ public class gremlinsAto extends LinearOpMode {
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-    static final double     turn_45_degrees    = 360 ;
+    //static final double     turn_45_degrees    = 360 ;
     static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
@@ -92,9 +91,6 @@ public class gremlinsAto extends LinearOpMode {
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
-
-        waitForStart();
-        telemetry.addData("say","dank memes");
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Resetting Encoders");
@@ -112,37 +108,31 @@ public class gremlinsAto extends LinearOpMode {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
+        waitForStart();
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(TURN_SPEED, 144, 0, 100); // turn 45 degrees
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
-        telemetry.addData("say","dank memes");
+        //robot.leftMotor.setPower(1);
+        //robot.leftMotor.setTargetPosition(robot.leftMotor.getCurrentPosition() + 2880);
+        //sleep(8000);
+        encoderDrive(TURN_SPEED, 12, 0, 3); // turn 45 degrees
+        encoderDrive(TURN_SPEED, 0, 12, 3);
+
+        // Step through each leg of the path,
+        // Note: Reverse movement is obtained by setting a negative distance (not speed)
+        //encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        //encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         /*
         lol
-        robot.shooter.setPower(1);// shoot for 1 seconds
+        robot.shooter.setPower(0.65);// shoot for 1 seconds
         sleep(2000); //wait for 1
         robot.shooter.setPower(0);// wait for 1 second
         encoderDrive(DRIVE_SPEED, 73,  73, 0.25); //drive forword 73inches
         encoderDrive(TURN_SPEED,   3, -3, 0.25); //turn 45 degrees
         encoderDrive(DRIVE_SPEED, 75, 75, 0.25); //drive forword 75inches
 */
-
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -183,7 +173,7 @@ public class gremlinsAto extends LinearOpMode {
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (robot.leftMotor.isBusy() && robot.rightMotor.isBusy())) {
+                   (robot.leftMotor.isBusy() || robot.rightMotor.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
