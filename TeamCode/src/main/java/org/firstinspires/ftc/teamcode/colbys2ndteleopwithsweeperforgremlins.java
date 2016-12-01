@@ -1,4 +1,6 @@
-// list of moters leftMotorE rightMotor
+
+/*
+ * Code t// list of moters leftMotorE rightMotor
 // list of serov(s) servo
 //list of sweepermotor name(s) sweeperMoter
 
@@ -37,49 +39,40 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="colby's Gremlins Teleop", group="Pushbot")
-@Disabled
 public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
     /* Declare OpMode members. */
     colbyPushBot robot = new colbyPushBot(); // use the class created to define a Pushbot's hardware
-    static final double INCREMENT = 0.1;     // amount to slew servo each CYCLE_MS cycle
-    static final int CYCLE_MS = 50;     // period of each cycle
-    static final double MAX_POS = 1.0;     // Maximum rotational position
-    static final double MIN_POS = 0.0;     // Minimum rotational position
+    static final double INCREMENT = 0.1; // amount to slew servo each CYCLE_MS cycle
+    static final int CYCLE_MS = 50; // period of each cycle
+    static final double MAX_POS = 1.0; // Maximum rotational position
+    static final double MIN_POS = 0.0; // Minimum rotational position
 
     static final double max = 0.5;
     static final double START = 0.25;
-    static final double buttonPushUp = 0.4;
-    static final double buttonPushOffset = 0.098;
-    public static final boolean EXP_RATE = true;
+    //static final double buttonPushUpOriginal = 0.05;
+    static double buttonPushUp = 0.05;
+    //static final double buttonPushOffset = 0.0098; // was 0.098
     // Define class members
 
     /*
-     * Code to run ONCE when the driver hits INIT
-     */
+ * Code to run ONCE when the driver hits INIT
+ */
     @Override
     public void init() {
         /* Initialize the hardware variables.
-         * The init() method of the hardware class does all the work here
-         */
+         * The init() method of the hardware class does all the work here
+         */
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        /*
-        boolean printMsg = false && (false ^ ((true ? false : true) ? (true == false) : (false != false)));
-        printMsg ^= !true;
-        if (true == printMsg ^ false){
-            for (int i=0;printMsg;i++) {
-                telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punched Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
-            }
-        }
-        */
+        telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
+
         //robot.servo2.setDirection(Servo.Direction.REVERSE);
         robot.pan.scaleRange(START, max);
         //robot.servo2.scaleRange(START, max);
@@ -89,24 +82,23 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
 
     /*
-     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
-     */
+     * Code to run REPEATEDLY after the driver hits INIT, but before they hit PLAY
+     */
     @Override
     public void init_loop() {
     }
 
     /*
-     * Code to run ONCE when the driver hits PLAY
-     */
+ * Code to run ONCE when the driver hits PLAY
+ */
     @Override
     public void start() {
-        telemetry.addData("Go go go go go!", "Time to start");
     }
 
     /*
-     * Code to run REPEATEDLY after
-    @Overridethe driver hits PLAY but before they hit STOP
-     */
+ * Code to run REPEATEDLY after
+@Overridethe driver hits PLAY but before they hit STOP
+ */
 
 
     public void loop() {
@@ -114,10 +106,6 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         //tank mode drive
         double left = gamepad1.left_stick_y;
         double right = gamepad1.right_stick_y;
-        if (EXP_RATE) {
-            left *= Math.abs(left);
-            right *= Math.abs(right);
-        }
         //robot.leftMotor.setPower(left+right);
         //robot.rightMotor.setPower(right+left);
         robot.leftMotor.setPower(right);
@@ -149,36 +137,36 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
             telemetry.addData("Say", "pan thing down");
 
         } else if (gamepad2.y) {
-            robot.pan.setPosition(1);
+            robot.pan.setPosition(1.2);
             telemetry.addData("Say", "pan thing up");
             //robot.servo2.setPosition(1);
         }
 
         //shooter
         //double shoot1 = gamepad2.right_trigger;
-        if(gamepad2.right_trigger > 0) {
-            robot.shooterMotor1.setPower(0.4 + gamepad2.right_trigger * 0.6);        //robot.shooterMotor2.setPower(shoot1);
+        if (gamepad2.right_trigger > 0) {
+            robot.shooterMotor1.setPower(1); //robot.shooterMotor2.setPower(shoot1);
             telemetry.addData("Say", "shooting");
-        }
-        else {
+        } else {
             robot.shooterMotor1.setPower(0);
         }
-
 
 /*
         // button pusher
         if (gamepad2.dpad_right) {
-            robot.buttonPusher.setPosition(buttonPushOffset - buttonPushUp);
-            telemetry.addData("Say", "button thing right");
+            buttonPushUp += buttonPushOffset;
+            robot.buttonPusher.setPosition(buttonPushUp);
+            telemetry.addData("Say", "button thing left ");
 
         } else if (gamepad2.dpad_left) {
-            robot.buttonPusher.setPosition(buttonPushOffset + buttonPushUp);
-            telemetry.addData("Say", "button thing left");
+            buttonPushUp -= buttonPushOffset;
+            robot.buttonPusher.setPosition(buttonPushUp);
+            telemetry.addData("Say", "button thing right");
 
-        } else if (gamepad2.dpad_up){
-            robot.buttonPusher.setPosition(buttonPushOffset);
+        } else if (gamepad2.dpad_up) {
+            buttonPushUp = buttonPushUpOriginal;
+            robot.buttonPusher.setPosition(buttonPushUp);
         }
-        */
-
+*/
     }
 }
