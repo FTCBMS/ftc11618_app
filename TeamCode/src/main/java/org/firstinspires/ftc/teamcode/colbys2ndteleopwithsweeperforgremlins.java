@@ -82,8 +82,8 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
     static final double MAX_POS = 1.0; // Maximum rotational position
     static final double MIN_POS = 0.0; // Minimum rotational position
 
-    static final double up = .7;
-    static final double down = 0.1;
+    //static final double up = .7;
+    //static final double down = 0.1;
     //static final double buttonPushUpOriginal = 0.05;
     static double buttonPushUp = 0.05;
     //static final double buttonPushOffset = 0.0098; // was 0.098
@@ -103,9 +103,9 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
 
         //robot.servo2.setDirection(Servo.Direction.REVERSE);
-        robot.pan.scaleRange(down, up);
+        //robot.pan.scaleRange(down, up);
         //robot.servo2.scaleRange(START, max);
-        robot.pan.setPosition(down);
+        //robot.pan.setPosition(down);
         //robot.buttonPusher.setPosition(buttonPushUp);
     }
 
@@ -152,6 +152,7 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
             robot.sweeperMoter.setPower(0);
             telemetry.addData("Say", "sweeper sweeper off");
         }
+        /*
         //ball lifter down = a up = y
         if (gamepad2.a) {
             robot.pan.setPosition(down);
@@ -161,11 +162,14 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
             robot.pan.setPosition(up);
             telemetry.addData("Say", "pan thing up");
             //robot.servo2.setPosition(1);
+
+
         }
+        */
         //shooter powerd by right trigger
         if (gamepad2.right_trigger > 0) {
-            robot.shooterMotor1.setPower(-0.55);
-            robot.shooterMotor2.setPower(-0.55);
+            robot.shooterMotor1.setPower(-0.75);
+            robot.shooterMotor2.setPower(-0.75);
             telemetry.addData("Say", "shooting");
         } else {
             robot.shooterMotor1.setPower(0);
