@@ -71,17 +71,25 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 public class gremlinsAto extends LinearOpMode {
 
     /* Declare OpMode members. */
-    RMHardwarePushbot         robot   = new RMHardwarePushbot();   // Use a Pushbot's hardware
+    colbyPushBotforAto         robot   = new colbyPushBotforAto();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-    //static final double     turn_45_degrees    = 360 ;
-    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
+    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
+    static final double go_45_degrees = 12;
+    //static final double up = .7;
+    //static final double down = 0.1;
+
+    //static final double     go_1_degrees    = 0.266666667;
+
+    double getInches(double degrees) {
+        return (go_45_degrees / 45) * degrees;
+    }
 
     @Override
     public void runOpMode() {
@@ -110,25 +118,21 @@ public class gremlinsAto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        //robot.leftMotor.setPower(1);
-        //robot.leftMotor.setTargetPosition(robot.leftMotor.getCurrentPosition() + 2880);
-        //sleep(8000);
-        encoderDrive(TURN_SPEED, 12, 0, 3); // turn 45 degrees
-        encoderDrive(TURN_SPEED, 0, 12, 3);
-
-        // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        //encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        //encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        //encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        robot.pan.setPosition(robot.down);
+        encoderDrive(TURN_SPEED, getInches(45), 0, 3); // turn 45 degrees
+        robot.shooterMotor1.setPower(0.55);// shoot once
+        robot.shooterMotor2.setPower(0.55);// shoot once
+        sleep(500); //wait for 2 seconds
+        robot.pan.setPosition(robot.up);
+        sleep(1000); //wait for 1 seconds
+        robot.shooterMotor1.setPower(0);// stop
+        robot.shooterMotor2.setPower(0);// stop
+        encoderDrive(DRIVE_SPEED,  75,  75, 30);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(TURN_SPEED,   getInches(30), 0, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
 
         /*
         lol
-        robot.shooter.setPower(0.65);// shoot for 1 seconds
-        sleep(2000); //wait for 1
-        robot.shooter.setPower(0);// wait for 1 second
+
         encoderDrive(DRIVE_SPEED, 73,  73, 0.25); //drive forword 73inches
         encoderDrive(TURN_SPEED,   3, -3, 0.25); //turn 45 degrees
         encoderDrive(DRIVE_SPEED, 75, 75, 0.25); //drive forword 75inches

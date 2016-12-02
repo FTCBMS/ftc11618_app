@@ -1,3 +1,32 @@
+/*
+
+CONFIGURING DATA
+
+
+
+drive motor name(s)
+
+1.left_drive (left drive motor)
+2.right_drive (right drive motor)
+
+shooter motor name(s)
+
+1.shoot_1 (shooter motor 1)
+2.shoot_2 (shooter motor 2)
+
+servo name(s)
+
+1.servo_1 (button pusher)
+
+sweeper motor name(S)
+
+1.sweeper_motor (sweeper motor)
+
+
+
+
+*/
+
 
 /*
  * Code t// list of moters leftMotorE rightMotor
@@ -53,8 +82,8 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
     static final double MAX_POS = 1.0; // Maximum rotational position
     static final double MIN_POS = 0.0; // Minimum rotational position
 
-    static final double max = 0.5;
-    static final double START = 0.25;
+    static final double up = .7;
+    static final double down = 0.1;
     //static final double buttonPushUpOriginal = 0.05;
     static double buttonPushUp = 0.05;
     //static final double buttonPushOffset = 0.0098; // was 0.098
@@ -74,10 +103,10 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
 
         //robot.servo2.setDirection(Servo.Direction.REVERSE);
-        robot.pan.scaleRange(START, max);
+        robot.pan.scaleRange(down, up);
         //robot.servo2.scaleRange(START, max);
-        robot.pan.setPosition(0);
-        robot.buttonPusher.setPosition(buttonPushUp);
+        robot.pan.setPosition(down);
+        //robot.buttonPusher.setPosition(buttonPushUp);
     }
 
 
@@ -111,10 +140,7 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         robot.leftMotor.setPower(right);
         robot.rightMotor.setPower(left);
 
-
-        //sweepermoter powed by left_bumper
-        //double sweeper = gamepad1.left_trigger;
-
+        //sweepermoter powed by left_bumper and right bumper
         if (gamepad1.left_bumper) {
             robot.sweeperMoter.setPower(-1);
             telemetry.addData("Say", "sweeper on");
@@ -126,30 +152,26 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
             robot.sweeperMoter.setPower(0);
             telemetry.addData("Say", "sweeper sweeper off");
         }
-        /*
-        position += .001;
-        position %= 1;
-        robot.servo.setPosition(position);
-        */
-        //lifter going on one servo
+        //ball lifter down = a up = y
         if (gamepad2.a) {
-            robot.pan.setPosition(0);
+            robot.pan.setPosition(down);
             telemetry.addData("Say", "pan thing down");
 
         } else if (gamepad2.y) {
-            robot.pan.setPosition(1.2);
+            robot.pan.setPosition(up);
             telemetry.addData("Say", "pan thing up");
             //robot.servo2.setPosition(1);
         }
-
-        //shooter
-        //double shoot1 = gamepad2.right_trigger;
+        //shooter powerd by right trigger
         if (gamepad2.right_trigger > 0) {
-            robot.shooterMotor1.setPower(1); //robot.shooterMotor2.setPower(shoot1);
+            robot.shooterMotor1.setPower(-0.55);
+            robot.shooterMotor2.setPower(-0.55);
             telemetry.addData("Say", "shooting");
         } else {
             robot.shooterMotor1.setPower(0);
+            robot.shooterMotor2.setPower(0);
         }
+
 
 /*
         // button pusher
@@ -170,3 +192,61 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully
+
+

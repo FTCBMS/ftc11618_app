@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 //import com.google.blocks.ftcrobotcontroller.runtime.DcMotorAccess;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -23,6 +24,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Servo channel:  Servo to open left claw:  "left_hand"
  * Servo channel:  Servo to open right claw: "right_hand"
  */
+@Disabled
 public class colbyPushBotforAtonomys
 {
     /* Public OpMode members. */
@@ -54,11 +56,11 @@ public class colbyPushBotforAtonomys
         // Define and Initialize Motors
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
+        servo   = hwMap.servo.get("servo_1");
+        sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
         //shooterMotor1   = hwMap.dcMotor.get("shoot_1");
         //shooterMotor2  = hwMap.dcMotor.get("shoot_2");
-        servo   = hwMap.servo.get("servo_1");
-       // servo2  = hwMap.servo.get("servo_2");
-        sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
+        // servo2  = hwMap.servo.get("servo_2");
 
         leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors

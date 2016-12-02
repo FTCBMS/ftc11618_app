@@ -28,8 +28,9 @@ public class colbyPushBot
     public DcMotor rightMotor  = null;
     public DcMotor sweeperMoter = null;
     public DcMotor shooterMotor1 = null;
+    public DcMotor shooterMotor2 = null;
     public Servo    pan   = null;
-    public Servo buttonPusher;
+    //public Servo buttonPusher;
 
 
     public static final double MID_SERVO       =  0.5 ;
@@ -54,9 +55,10 @@ public class colbyPushBot
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
         shooterMotor1   = hwMap.dcMotor.get("shoot_1");
+        shooterMotor2   = hwMap.dcMotor.get("shoot_2");
         pan   = hwMap.servo.get("servo_1");
-        buttonPusher = hwMap.servo.get("servo_2");
         sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
+        //buttonPusher = hwMap.servo.get("servo_2");
 
 
 
