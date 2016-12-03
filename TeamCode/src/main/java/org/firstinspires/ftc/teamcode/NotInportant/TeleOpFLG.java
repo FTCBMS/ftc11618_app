@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.NotInportant;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.RMHardwarePushbot;
+import org.firstinspires.ftc.teamcode.NotInportant.RMHardwarePushbot;
 
 @TeleOp(name="PushBot: RMTeleOpMode", group="Pushbot")  // @Autonomous(...) is the other common choice
 @Disabled

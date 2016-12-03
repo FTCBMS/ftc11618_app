@@ -66,28 +66,31 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
 TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.inportant;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name="colby's Gremlins Teleop", group="Pushbot")
-public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
+@TeleOp(name="Gremlins Teleop", group="Pushbot")
+public class GremlinsTeleop extends OpMode {
 
     /* Declare OpMode members. */
     colbyPushBot robot = new colbyPushBot(); // use the class created to define a Pushbot's hardware
+
+    /*
     static final double INCREMENT = 0.1; // amount to slew servo each CYCLE_MS cycle
     static final int CYCLE_MS = 50; // period of each cycle
     static final double MAX_POS = 1.0; // Maximum rotational position
     static final double MIN_POS = 0.0; // Minimum rotational position
-
-    //static final double up = .7;
-    //static final double down = 0.1;
-    //static final double buttonPushUpOriginal = 0.05;
+    */
+    /*
+    static final double up = .7;
+    static final double down = 0.1;
+    static final double buttonPushUpOriginal = 0.05;
     static double buttonPushUp = 0.05;
-    //static final double buttonPushOffset = 0.0098; // was 0.098
-    // Define class members
+    static final double buttonPushOffset = 0.0098; // was 0.098
+    Define class members
+    */
 
     /*
  * Code to run ONCE when the driver hits INIT
@@ -100,7 +103,6 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "there once was a boy named timmy he was really small so people called him little timmy little timmy didnt like that name thou. One day timmy was at school and and his math teacher asked him whe 5+5 was but timmy didnt know so timmy guessed 12? all the other kids laughed but it wasnt timmys fault he didnt know his brain was just so small he couldnt rememberhe barley rememberd the first seven numbers in the alphabe he even mixed up numbers with letters. later that day at recces a bully named bob the builder came up to him and said dum LITTLE Timmy your so smal a ant could squash you he hah little timmy was so mad he kicked the bully ing the shin the bully just laughed and punche Timmy in the face timmy died of sadness later that day. thats why you shouldnt bully. ");
 
         //robot.servo2.setDirection(Servo.Direction.REVERSE);
         //robot.pan.scaleRange(down, up);
@@ -135,25 +137,34 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
         //tank mode drive
         double left = gamepad1.left_stick_y;
         double right = gamepad1.right_stick_y;
-        //robot.leftMotor.setPower(left+right);
-        //robot.rightMotor.setPower(right+left);
         robot.leftMotor.setPower(right);
         robot.rightMotor.setPower(left);
 
+
         //sweepermoter powed by left_bumper and right bumper
-        if (gamepad1.left_bumper) {
-            robot.sweeperMoter.setPower(-1);
+        if (gamepad1.left_bumper || gamepad2.left_bumper)
+        {
+            robot.sweeperMoter.setPower(colbyPushBot.sweepPower);
             telemetry.addData("Say", "sweeper on");
 
-        } else if (gamepad1.right_bumper) {
-            robot.sweeperMoter.setPower(1);
+        } else if (gamepad1.right_bumper || gamepad2.right_bumper) {
+            robot.sweeperMoter.setPower(-colbyPushBot.sweepPower);
             telemetry.addData("Say", "sweeper on backward");
         } else {
             robot.sweeperMoter.setPower(0);
             telemetry.addData("Say", "sweeper sweeper off");
         }
+
+        //shooter powerd by right trigger
+        if (gamepad2.right_trigger > 0) {
+            robot.startShooter();
+            telemetry.addData("Say", "shooting");
+        } else {
+            robot.stopShooter();
+        }
+
         /*
-        //ball lifter down = a up = y
+        //ball lifter/pan down = a up = y
         if (gamepad2.a) {
             robot.pan.setPosition(down);
             telemetry.addData("Say", "pan thing down");
@@ -166,15 +177,7 @@ public class colbys2ndteleopwithsweeperforgremlins extends OpMode {
 
         }
         */
-        //shooter powerd by right trigger
-        if (gamepad2.right_trigger > 0) {
-            robot.shooterMotor1.setPower(-0.75);
-            robot.shooterMotor2.setPower(-0.75);
-            telemetry.addData("Say", "shooting");
-        } else {
-            robot.shooterMotor1.setPower(0);
-            robot.shooterMotor2.setPower(0);
-        }
+
 
 
 /*

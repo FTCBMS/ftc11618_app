@@ -1,12 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.inportant;
 
 //import com.google.blocks.ftcrobotcontroller.runtime.DcMotorAccess;
-//import com.google.blocks.ftcrobotcontroller.runtime.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
 /**
  * This is NOT an opmode.
  *
@@ -23,7 +22,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Servo channel:  Servo to open left claw:  "left_hand"
  * Servo channel:  Servo to open right claw: "right_hand"
  */
-public class colbyPushBotforAto
+@Disabled
+public class colbyPushBot
 {
     /* Public OpMode members. */
     public DcMotor leftMotor   = null;
@@ -32,13 +32,23 @@ public class colbyPushBotforAto
     public DcMotor shooterMotor1 = null;
     public DcMotor shooterMotor2 = null;
     public Servo    pan   = null;
-    static final double up = .7;
-    static final double down = 0.1;
+    //public Servo buttonPusher;
 
-
+    public void startShooter() {
+        shooterMotor1.setPower(-colbyPushBot.shootPower);
+        shooterMotor2.setPower(-colbyPushBot.shootPower);
+    }
+    public void stopShooter() {
+        shooterMotor1.setPower(0);
+        shooterMotor2.setPower(0);
+    }
 
     public static final double MID_SERVO       =  0.5 ;
     //public static final double ARM_DOWN_POWER  = -0.45 ;
+
+    static final double sweepPower = 1;
+    static final double shootPower = 0.75;
+
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
     private ElapsedTime period  = new ElapsedTime();
@@ -46,7 +56,7 @@ public class colbyPushBotforAto
 
 
     /* Constructor */
-    public colbyPushBotforAto(){
+    public colbyPushBot(){
 
     }
 
@@ -55,13 +65,13 @@ public class colbyPushBotforAto
         // Save reference to Hardware map
         hwMap = ahwMap;
 
-        // Define and Initialize Motors
+        // NEVER DELETE JUST COMMENT OUT. that way its there if you want it back
         leftMotor   = hwMap.dcMotor.get("left_drive");
         rightMotor  = hwMap.dcMotor.get("right_drive");
         shooterMotor1   = hwMap.dcMotor.get("shoot_1");
         shooterMotor2   = hwMap.dcMotor.get("shoot_2");
-        pan   = hwMap.servo.get("servo_1");
         sweeperMoter = hwMap.dcMotor.get("sweeper_motor");
+        //pan   = hwMap.servo.get("servo_1");
         //buttonPusher = hwMap.servo.get("servo_2");
 
 
@@ -72,6 +82,9 @@ public class colbyPushBotforAto
         // Set all motors to zero power
         leftMotor.setPower(0);
         rightMotor.setPower(0);
+        sweeperMoter.setPower(0);
+        stopShooter();
+
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -79,7 +92,7 @@ public class colbyPushBotforAto
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         sweeperMoter.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         shooterMotor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        //shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        shooterMotor2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         //armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.

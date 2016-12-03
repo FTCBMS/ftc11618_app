@@ -30,15 +30,12 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
 TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.inportant;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -68,28 +65,31 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @Autonomous(name="gremlins: Auto Drive By Encoder", group="Pushbot")
-public class gremlinsAto extends LinearOpMode {
+public class GremlinsAtoRedTurn extends LinearOpMode {
 
     /* Declare OpMode members. */
-    colbyPushBotforAto         robot   = new colbyPushBotforAto();   // Use a Pushbot's hardware
+    colbyPushBot robot   = new colbyPushBot();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
+            (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
     static final double go_45_degrees = 12;
+    static final double sweep = 0.35;
     //static final double up = .7;
     //static final double down = 0.1;
 
     //static final double     go_1_degrees    = 0.266666667;
 
     double getInches(double degrees) {
-        return (go_45_degrees / 45) * degrees;
+        return (go_45_degrees/ 12) * degrees;
     }
+
+    // double getpower(double power) { return (0.75/ 75) * power; }
 
     @Override
     public void runOpMode() {
@@ -118,18 +118,22 @@ public class gremlinsAto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        robot.pan.setPosition(robot.down);
-        encoderDrive(TURN_SPEED, getInches(45), 0, 3); // turn 45 degrees
-        robot.shooterMotor1.setPower(0.55);// shoot once
-        robot.shooterMotor2.setPower(0.55);// shoot once
-        sleep(500); //wait for 2 seconds
-        robot.pan.setPosition(robot.up);
+        //robot.pan.setPosition(robot.down);
+        encoderDrive(TURN_SPEED, 0, -16.5, 30); // turn 45 degrees
+        /*
+        robot.startShooter();
         sleep(1000); //wait for 1 seconds
-        robot.shooterMotor1.setPower(0);// stop
-        robot.shooterMotor2.setPower(0);// stop
-        encoderDrive(DRIVE_SPEED,  75,  75, 30);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   getInches(30), 0, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
+        robot.sweeperMoter.setPower(-sweep);
+        sleep(1000); //wait for 1 seconds
+        robot.stopShooter();
+        */
+        encoderDrive(DRIVE_SPEED,  -64,  -64, 30);
+        //encoderDrive(TURN_SPEED,   getInches(30), 0, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
 
+        /*
+        robot.shooterMotor1.setPower (getpower (75));  // shoot once
+        robot.shooterMotor2.setPower (getpower (75));// shoot once
+        */
         /*
         lol
 
@@ -141,6 +145,8 @@ public class gremlinsAto extends LinearOpMode {
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
+
+
 
     /*
      *  Method to perfmorm a relative move, based on encoder counts.
@@ -176,14 +182,14 @@ public class gremlinsAto extends LinearOpMode {
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
-                   (runtime.seconds() < timeoutS) &&
-                   (robot.leftMotor.isBusy() || robot.rightMotor.isBusy())) {
+                    (runtime.seconds() < timeoutS) &&
+                    (robot.leftMotor.isBusy() || robot.rightMotor.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
                 telemetry.addData("Path2",  "Running at %7d :%7d",
-                                            robot.leftMotor.getCurrentPosition(),
-                                            robot.rightMotor.getCurrentPosition());
+                        robot.leftMotor.getCurrentPosition(),
+                        robot.rightMotor.getCurrentPosition());
                 telemetry.update();
             }
 
