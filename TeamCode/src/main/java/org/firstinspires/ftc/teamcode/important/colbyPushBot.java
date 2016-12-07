@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.inportant;
+package org.firstinspires.ftc.teamcode.important;
 
 //import com.google.blocks.ftcrobotcontroller.runtime.DcMotorAccess;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
@@ -36,7 +36,7 @@ public class colbyPushBot
 
     public void startShooter() {
         shooterMotor1.setPower(-colbyPushBot.shootPower);
-        shooterMotor2.setPower(-colbyPushBot.shootPower);
+        shooterMotor2.setPower(colbyPushBot.shootPower);
     }
     public void stopShooter() {
         shooterMotor1.setPower(0);
@@ -47,7 +47,7 @@ public class colbyPushBot
     //public static final double ARM_DOWN_POWER  = -0.45 ;
 
     static final double sweepPower = 1;
-    static final double shootPower = 0.75;
+    static final double shootPower = 1;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;

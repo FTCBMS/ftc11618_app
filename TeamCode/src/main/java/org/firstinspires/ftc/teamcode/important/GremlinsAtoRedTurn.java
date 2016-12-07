@@ -30,7 +30,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
 TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.firstinspires.ftc.teamcode.inportant;
+package org.firstinspires.ftc.teamcode.important;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -64,7 +64,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="gremlins: Auto Drive By Encoder", group="Pushbot")
+@Autonomous(name="gremlins: Auto Drive red turn", group="Pushbot")
 public class GremlinsAtoRedTurn extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -119,7 +119,7 @@ public class GremlinsAtoRedTurn extends LinearOpMode {
         waitForStart();
 
         //robot.pan.setPosition(robot.down);
-        encoderDrive(TURN_SPEED, 0, -16.5, 30); // turn 45 degrees
+        encoderDrive(TURN_SPEED, -16, 0, 30); // turn 45 degrees
         /*
         robot.startShooter();
         sleep(1000); //wait for 1 seconds

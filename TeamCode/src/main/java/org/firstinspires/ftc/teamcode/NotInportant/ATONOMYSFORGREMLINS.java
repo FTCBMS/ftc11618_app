@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.inportant.colbyPushBot;
+import org.firstinspires.ftc.teamcode.important.colbyPushBot;
 
 /**
  * This file illustrates the concept of driving a path based on time.

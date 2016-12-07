@@ -36,7 +36,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.inportant.colbyPushBot;
+import org.firstinspires.ftc.teamcode.important.colbyPushBot;
 
 /**
  * This file provides basic Telop driving for a Pushbot robot.

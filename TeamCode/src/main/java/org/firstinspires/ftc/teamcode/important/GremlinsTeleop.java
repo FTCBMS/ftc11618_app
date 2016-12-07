@@ -66,7 +66,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
 TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.firstinspires.ftc.teamcode.inportant;
+package org.firstinspires.ftc.teamcode.important;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -134,14 +134,14 @@ public class GremlinsTeleop extends OpMode {
 
     public void loop() {
 
-        //tank mode drive
+        //tank mode drive on gamepad1
         double left = gamepad1.left_stick_y;
         double right = gamepad1.right_stick_y;
         robot.leftMotor.setPower(right);
         robot.rightMotor.setPower(left);
 
 
-        //sweepermoter powed by left_bumper and right bumper
+        //sweepermoter powed by left_bumper and right bumper on both gamepads
         if (gamepad1.left_bumper || gamepad2.left_bumper)
         {
             robot.sweeperMoter.setPower(colbyPushBot.sweepPower);
@@ -155,7 +155,7 @@ public class GremlinsTeleop extends OpMode {
             telemetry.addData("Say", "sweeper sweeper off");
         }
 
-        //shooter powerd by right trigger
+        //shooter powerd by right trigger on gamepad2
         if (gamepad2.right_trigger > 0) {
             robot.startShooter();
             telemetry.addData("Say", "shooting");

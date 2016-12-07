@@ -30,9 +30,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
 TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.firstinspires.ftc.teamcode.inportant;
+package org.firstinspires.ftc.teamcode.important;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -64,8 +65,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="gremlins: Auto Drive By Encoder straight", group="Pushbot")
-public class GremlinsAtoStraight extends LinearOpMode {
+@Autonomous(name="gremlins: Blue Turn", group="Pushbot")
+@Disabled
+public class gremlinsAtoForBeconPushIfR2 extends LinearOpMode {
 
     /* Declare OpMode members. */
     colbyPushBot robot   = new colbyPushBot();   // Use a Pushbot's hardware
@@ -75,7 +77,7 @@ public class GremlinsAtoStraight extends LinearOpMode {
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_INCHES * 3.1415);
+                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
     static final double     DRIVE_SPEED             = 0.6;
     static final double     TURN_SPEED              = 0.5;
     static final double go_45_degrees = 12;
@@ -89,7 +91,7 @@ public class GremlinsAtoStraight extends LinearOpMode {
         return (go_45_degrees/ 12) * degrees;
     }
 
-    // double getpower(double power) { return (0.75/ 75) * power; }
+   // double getpower(double power) { return (0.75/ 75) * power; }
 
     @Override
     public void runOpMode() {
@@ -118,15 +120,11 @@ public class GremlinsAtoStraight extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        //robot.pan.setPosition(robot.down);
-        /*
-        robot.startShooter();
-        sleep(1000); //wait for 1 seconds
-        robot.sweeperMoter.setPower(-sweep);
-        sleep(1000); //wait for 1 seconds
-        robot.stopShooter();
-        */
-        encoderDrive(DRIVE_SPEED,  -48,  -48, 30);
+        encoderDrive(DRIVE_SPEED,  20,  20, 30);
+        encoderDrive(TURN_SPEED, -16, 0, 30); // turn 45 degrees
+        encoderDrive(DRIVE_SPEED,  20,  20, 30);
+
+
 
         /*
         robot.shooterMotor1.setPower (getpower (75));  // shoot once
@@ -180,14 +178,14 @@ public class GremlinsAtoStraight extends LinearOpMode {
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS) &&
-                    (robot.leftMotor.isBusy() || robot.rightMotor.isBusy())) {
+                   (runtime.seconds() < timeoutS) &&
+                   (robot.leftMotor.isBusy() || robot.rightMotor.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
                 telemetry.addData("Path2",  "Running at %7d :%7d",
-                        robot.leftMotor.getCurrentPosition(),
-                        robot.rightMotor.getCurrentPosition());
+                                            robot.leftMotor.getCurrentPosition(),
+                                            robot.rightMotor.getCurrentPosition());
                 telemetry.update();
             }
 
